@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Savings Calculator</title>
+
+    <style>
+        body {
+            max-width: 650px;
+            margin: 0 auto;
+            margin-top: 2rem;
+            border: 1px solid #c6e2ff;
+            padding: 2rem;
+            text-align: center;
+        }
+        table {
+            margin: 0 auto;
+            border-collapse: collapse;
+            border: 1px solid #f2f2f2;
+            visibility: hidden;
+           /* width: 10rem;*/
+           
+           
+        }
+       
+        th {
+            padding: 1rem;
+            text-align: left;
+            /*background-color: #b0e0e6;*/
+            background-color: #c6e2ff;
+            
+           /* border-radius: 1rem;*/
+        }
+        td {
+            text-align: right;
+            padding: 1rem;
+           /* background-color: grey;*/
+        }
+        
+        tr:nth-child(even){
+            background-color: #f2f2f2;
+            }
+
+        input[type=submit] {
+           /* border: 2px solid #501c29;*/
+           border: 2px solid #c6e2ff;
+            border-radius: 5.5px;
+            background-color: white;
+            padding: 0.3rem;
+            -webkit-transition: background-color 2s;
+            transition: background-color 2s;
+            
+        }
+
+        input[type=submit]:hover {
+            background-color:#c6e2ff;
+            color: #f2f2f2;
+        }
+
+       /* input[type=text]:focus {
+            box-shadow: 0 0 5px #c6e2ff;
+            border: 1px solid #c6c6c6;
+        }*/
+    </style>
+
+
+    
+</head>
+<body>
+    
+        <h1>Savings Calculator</h1>
+        <p><i>This is a bugeting calculator that is based on the 50/30/20 investment. 
+        50% of your budget goes toward needs such as grocerries and bills. 30% 
+        of the it can go toward things that you want and 20% going toward savings.
+
+        </i> </p>
+        <label>Pay After Taxes </label>
+        <input type="text" id="takehome" name="takehome"> 
+        <input type="submit" onclick="SavingsCal()" value="Calculate"/>
+       <!-- <button type="submit" onclick="clear()">reset</button>-->
+       <br><br>
+       <table id="table">
+           <tr>
+               <th>Pay</th>
+               <td id="output_pay"></td>
+           </tr>
+           <tr>
+               <th>Needs</th>
+               <td id="output_needs"></td>
+           </tr>
+           <tr>
+               <th>Wants</th>
+               <td id="output_wants"></td>
+           </tr>
+           <tr>
+               <th>Savings</th>
+               <td id="output_saving"></td>
+           </tr>
+       </table>
+    
+
+    <script>
+      
+       /*document.getElementById('reset').onclick = function () {
+           takehome.innerHTML = "";
+       }*/
+       
+
+       function SavingsCal () {
+           let takehome = document.getElementById('takehome').value;
+           let pay = parseFloat(takehome);
+           let n = pay * (50 / 100);
+           let w = pay * (30 / 100);
+           let s = pay * (20 / 100);
+           /*let needs = n.toFixed(2);
+           let wants = w.toFixed(2);
+           let savings = s.toFixed(2);*/
+           const formatter = new Intl.NumberFormat('en-US', {
+           style: 'currency',
+           currency: 'USD',
+           minimumFractionDigits: 2
+           })
+           let paid = formatter.format(pay);
+           let needs = formatter.format(n);
+           let wants = formatter.format(w);
+           let savings = formatter.format(s);
+           //return savings;
+            
+           if  (isNaN(pay)) {
+               alert("Enter a valid number")
+
+           }
+
+           else {
+               /*alert(`needs: ${needs} wants: ${wants} savings: ${savings}`);
+               let output = document.getElementById('output').innerHTML = 
+               `needs: ${needs} wants: ${wants} savings: ${savings}`;*/
+               let table = document.getElementById('table');
+               table.style.visibility = "visible";
+               let output_pay = document.getElementById('output_pay').innerHTML = paid;
+               let output_needs = document.getElementById('output_needs').innerHTML = needs;
+               let output_wants = document.getElementById('output_wants').innerHTML = wants;
+               let output_saving = document.getElementById('output_saving').innerHTML = savings;
+           }
+            }
+
+          
+    </script>
+</body>
+</html>
